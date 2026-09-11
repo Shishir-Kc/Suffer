@@ -1,2 +1,2 @@
-# Odyssey
+# Suffer
 A Travel mini-game

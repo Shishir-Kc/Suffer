@@ -310,6 +310,44 @@ em { color: var(--color-brown-secondary); font-style: normal; }
 .spinner { animation: spin 1s linear infinite; border: 3px solid rgba(196,168,130,.24); border-top-color: var(--color-brown-secondary); border-radius: 50%; height: 20px; width: 20px; }
 .sr-only { clip: rect(0,0,0,0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 
+.timeline-heading { margin: 11px 0 21px; padding-left: 2px; }
+.timeline-heading-icon { align-items: center; background: rgba(196,168,130,.2); border-radius: 16px; color: var(--color-brown-secondary); display: flex; height: 46px; justify-content: center; margin-bottom: 16px; width: 46px; }
+.timeline-heading h1 { font-size: 34px; margin: 8px 0; }
+.timeline-heading p { color: var(--color-text-secondary); font-size: 13px; max-width: 34ch; }
+.timeline-summary { align-items: center; display: flex; justify-content: space-between; margin-bottom: 21px; padding: 14px 17px; }
+.timeline-summary > div:first-child { display: grid; gap: 1px; }
+.timeline-summary strong { font-size: 20px; }
+.timeline-summary-meta { align-items: center; color: var(--color-success); display: flex; font-size: 11px; font-weight: 700; gap: 5px; }
+.timeline-list { display: grid; gap: 6px; position: relative; }
+.timeline-list::before { background: rgba(196,168,130,.3); bottom: 18px; content: ""; left: 17px; position: absolute; top: 18px; width: 2px; }
+.timeline-entry { align-items: center; background: transparent; border: 0; border-radius: 19px; color: var(--color-text-primary); display: grid; gap: 8px; grid-template-columns: 35px 62px minmax(0, 1fr) auto; min-height: 68px; padding: 8px 10px 8px 0; position: relative; text-align: left; transition: background .18s ease, box-shadow .18s ease, transform .18s ease; width: 100%; }
+.timeline-entry:hover { background: rgba(255,255,255,.45); }
+.timeline-entry:active { box-shadow: var(--shadow-pressed); transform: translateY(1px); }
+.timeline-entry-available { background: rgba(196,168,130,.16); box-shadow: var(--shadow-md); }
+.timeline-entry-available:hover { background: rgba(196,168,130,.25); }
+.timeline-entry-completed { background: rgba(123,174,127,.09); }
+.timeline-entry-locked { color: var(--color-text-secondary); }
+.timeline-rail { align-items: center; display: flex; height: 100%; justify-content: center; position: relative; z-index: 1; }
+.timeline-dot { align-items: center; background: var(--color-bg); border: 2px solid var(--color-brown-primary); border-radius: 50%; color: var(--color-text-secondary); display: flex; height: 28px; justify-content: center; width: 28px; }
+.timeline-entry-available .timeline-dot { background: var(--color-text-primary); border-color: var(--color-text-primary); box-shadow: 0 0 0 6px rgba(196,168,130,.18); color: var(--color-brown-primary); }
+.timeline-entry-completed .timeline-dot { background: var(--color-success); border-color: var(--color-success); color: white; }
+.timeline-entry-locked .timeline-dot { border-color: rgba(139,115,85,.35); color: rgba(139,115,85,.6); }
+.timeline-time { color: var(--color-text-secondary); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.timeline-entry-content { display: grid; gap: 3px; min-width: 0; }
+.timeline-entry-content strong { font-size: 14px; overflow-wrap: anywhere; }
+.timeline-entry-locked .timeline-entry-content strong { color: var(--color-text-secondary); font-weight: 600; }
+.timeline-entry-completed .timeline-entry-content strong { color: #5f9464; text-decoration: line-through; text-decoration-color: rgba(95,148,100,.38); }
+.timeline-track-label { align-items: center; color: var(--color-text-secondary); display: inline-flex; font-size: 10px; gap: 4px; }
+.timeline-entry-available .timeline-track-label { color: var(--color-brown-secondary); }
+.timeline-active-label { background: var(--color-brown-primary); border-radius: 999px; color: var(--color-text-primary); font-size: 10px; font-weight: 800; padding: 5px 8px; }
+.timeline-key { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 3px 12px; }
+.timeline-key > span { align-items: center; color: var(--color-text-secondary); display: inline-flex; font-size: 11px; gap: 5px; }
+.key-dot { border-radius: 50%; display: inline-block; height: 8px; width: 8px; }
+.key-dot-active { background: var(--color-brown-primary); box-shadow: 0 0 0 3px rgba(196,168,130,.18); }
+.key-dot-upcoming { background: rgba(139,115,85,.38); }
+.key-dot-done { background: var(--color-success); }
+.timeline-footnote { align-items: center; color: var(--color-text-secondary); display: flex; font-size: 11px; gap: 6px; margin: 6px 3px 14px; }
+
 @keyframes slide-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(196,117,106,.35); } 50% { box-shadow: 0 0 0 10px rgba(196,117,106,0); } }
 @keyframes spin { to { transform: rotate(360deg); } }

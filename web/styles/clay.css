@@ -1,3 +1,12 @@
 .clay-soft { background: var(--color-surface); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
 .clay-pressed { box-shadow: var(--shadow-pressed); }
 .night-mode { --color-bg: var(--color-bg-night); --color-surface: var(--color-surface-night); --color-text-primary: #fffaf1; --color-text-secondary: #d2bfa1; }
+
+.timeline-node--pulse {
+  animation: timeline-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes timeline-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 168, 130, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(196, 168, 130, 0); }
+}

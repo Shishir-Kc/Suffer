@@ -1,3 +1,3 @@
-import { TimelineView } from "@/components/timeline/TimelineView";
+import { TimelineScreen } from "@/components/timeline/TimelineScreen";
 
-export default function Page() { return <TimelineView />; }
+export default function Page() { return <TimelineScreen />; }

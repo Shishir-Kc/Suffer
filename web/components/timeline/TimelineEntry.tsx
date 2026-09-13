@@ -1,42 +1,31 @@
-"use client";
+import type { ReactNode } from "react";
 
-import { ArrowRight, Check, Flag, LockKeyhole, Sparkles, UserRound, UsersRound } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import type { Quest } from "@/types";
-import type { QuestState } from "@/lib/questEngine";
+export type TimelineEntryProps = {
+  time: string;
+  title: string;
+  trackLabel: string;
+  trackIcon: ReactNode;
+  status: "completed" | "active" | "upcoming";
+  isLast?: boolean;
+  onClick?: () => void;
+};
 
-const trackMeta = {
-  individual: { label: "Your quest", Icon: UserRound },
-  group: { label: "Group quest", Icon: UsersRound },
-  final: { label: "Final quest", Icon: Flag },
-} as const;
+export function TimelineEntry({ time, title, trackLabel, trackIcon, status, isLast, onClick }: TimelineEntryProps) {
+  const cardBg = status === "completed" ? "var(--color-brown-secondary)" : status === "active" ? "var(--color-brown-primary)" : "var(--color-bg)";
+  const textColor = status === "completed" ? "#FFFFFF" : "var(--color-text-primary)";
 
-const stateMeta = {
-  completed: { label: "Done", Icon: Check },
-  available: { label: "Live now", Icon: Sparkles },
-  locked: { label: "Not yet", Icon: LockKeyhole },
-} as const;
-
-export function TimelineEntry({ quest, state, index, onSelect }: { quest: Quest; state: QuestState; index: number; onSelect: () => void }) {
-  const entryRef = useRef<HTMLButtonElement>(null);
-  const [visible, setVisible] = useState(false);
-  const track = trackMeta[quest.track];
-  const status = stateMeta[state === "chill" ? "locked" : state];
-  const TrackIcon = track.Icon;
-  const StateIcon = status.Icon;
-  const time = new Date(quest.triggerTime).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-
-  useEffect(() => {
-    const element = entryRef.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      setVisible(true);
-      observer.disconnect();
-    }, { threshold: 0.12 });
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
-  return <button ref={entryRef} className={`timeline-entry timeline-entry-${state} ${visible ? "timeline-entry-visible" : ""}`} style={{ "--timeline-delay": `${Math.min(index * 55, 275)}ms` } as React.CSSProperties} onClick={onSelect} type="button" aria-label={`${quest.title}, ${track.label}, ${time}${state === "completed" ? ", completed" : state === "locked" ? ", upcoming" : ", active"}`}><span className="timeline-node-column" aria-hidden="true"><span className="timeline-node"><StateIcon size={state === "available" ? 15 : 14} /></span></span><span className="timeline-entry-card"><span className="timeline-entry-header"><span className="timeline-time">{time}</span><span className="timeline-state-copy"><StateIcon size={13} /> {status.label}</span></span><span className="timeline-title-row"><strong>{quest.title}</strong>{state === "available" && <span className="timeline-go-chip">Go <ArrowRight size={14} aria-hidden="true" /></span>}</span><span className="timeline-entry-meta"><span className="timeline-track-label"><TrackIcon size={13} aria-hidden="true" /> {track.label}</span></span></span></button>;
+  return <div style={{ display: "flex", gap: "var(--space-md)", alignItems: "flex-start" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 24 }}>
+      <div className={status === "active" ? "timeline-node timeline-node--pulse" : "timeline-node"} style={{ width: 12, height: 12, borderRadius: "50%", background: status === "upcoming" ? "var(--color-text-secondary)" : cardBg, marginTop: 6 }} />
+      {!isLast && <div style={{ flex: 1, width: 2, background: "var(--color-brown-secondary)", opacity: 0.3, marginTop: 4 }} />}
+    </div>
+    <div style={{ flex: 1, marginBottom: "var(--space-lg)", padding: "var(--space-md)", borderRadius: "var(--radius-lg)", background: cardBg, color: textColor, boxShadow: "var(--shadow-md)", cursor: onClick ? "pointer" : "default" }} onClick={onClick}>
+      <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 4 }}>{time}</div>
+      <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{title}</div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, opacity: 0.8 }}>
+        {trackIcon}
+        <span>{trackLabel}</span>
+      </div>
+    </div>
+  </div>;
 }

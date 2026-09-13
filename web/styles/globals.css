@@ -310,6 +310,24 @@ em { color: var(--color-brown-secondary); font-style: normal; }
 .spinner { animation: spin 1s linear infinite; border: 3px solid rgba(196,168,130,.24); border-top-color: var(--color-brown-secondary); border-radius: 50%; height: 20px; width: 20px; }
 .sr-only { clip: rect(0,0,0,0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 
+.timeline-heading { margin: 11px 0 24px; padding-left: 2px; }
+.timeline-heading-icon { align-items: center; background: rgba(196,168,130,.2); border-radius: 16px; color: var(--color-brown-secondary); display: flex; height: 46px; justify-content: center; margin-bottom: 16px; width: 46px; }
+.timeline-heading h1 { font-size: 34px; margin: 8px 0; }
+.timeline-heading p { color: var(--color-text-secondary); font-size: 13px; max-width: 34ch; }
+.timeline-summary { align-items: stretch; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); margin-bottom: 25px; padding: 18px 17px; }
+.timeline-summary-stat { display: grid; gap: 5px; min-width: 0; }
+.timeline-summary-stat-right { text-align: right; }
+.timeline-summary strong { font-size: 21px; line-height: 1.1; }
+.timeline-summary strong small { color: var(--color-text-secondary); display: block; font-size: 11px; font-weight: 600; letter-spacing: 0; margin-top: 4px; }
+.timeline-summary-divider { background: rgba(196,168,130,.32); width: 1px; }
+.timeline-key { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 3px 12px; }
+.timeline-key > span { align-items: center; color: var(--color-text-secondary); display: inline-flex; font-size: 11px; gap: 5px; }
+.key-dot { border-radius: 50%; display: inline-block; height: 8px; width: 8px; }
+.key-dot-active { background: var(--color-brown-primary); box-shadow: 0 0 0 3px rgba(196,168,130,.18); }
+.key-dot-upcoming { background: #fff; border: 1px solid rgba(139,115,85,.38); }
+.key-dot-done { background: var(--color-text-primary); }
+.timeline-footnote { align-items: center; color: var(--color-text-secondary); display: flex; font-size: 11px; gap: 6px; margin: 6px 3px 14px; }
+
 @keyframes slide-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(196,117,106,.35); } 50% { box-shadow: 0 0 0 10px rgba(196,117,106,0); } }
 @keyframes spin { to { transform: rotate(360deg); } }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Flag, MapPinned, Settings2, Trophy } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { demoCompletions, demoPlayers, demoQuests } from "@/lib/demoData";
 import { getCurrentQuest, getQuestState } from "@/lib/questEngine";
 import { RouteShell } from "@/components/RouteShell";
@@ -15,7 +15,11 @@ export function HomeScreen() {
   const router = useRouter();
   const player = demoPlayers[0];
   const adminPress = useRef<number | undefined>(undefined);
-  const now = useMemo(() => new Date(), []);
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const interval = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(interval);
+  }, []);
   const individual = useMemo(() => getCurrentQuest(demoQuests, "individual", demoCompletions, player.id, now), [now, player.id]);
   const group = useMemo(() => getCurrentQuest(demoQuests, "group", demoCompletions, player.id, now), [now, player.id]);
   const individualState = individual ? getQuestState(individual, demoQuests, demoCompletions, player.id, now) : "completed";

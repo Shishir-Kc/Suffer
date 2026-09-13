@@ -24,6 +24,11 @@ export async function seedQuestData(quests: Quest[]) {
   await tx.done;
 }
 
+export async function getStoredQuests() {
+  const db = await database();
+  return db.getAll("quests");
+}
+
 export async function queueSyncPayload(payload: SyncPayload) {
   const db = await database();
   const completions = db.transaction("completions", "readwrite");
@@ -38,4 +43,3 @@ export async function queueSyncPayload(payload: SyncPayload) {
   ]);
   await Promise.all([completions.done, votes.done, reports.done, gpsLogs.done]);
 }
-

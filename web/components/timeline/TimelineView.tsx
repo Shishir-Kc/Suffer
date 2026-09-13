@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarClock, Check, Clock3 } from "lucide-react";
+import { CalendarClock, Clock3 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Quest } from "@/types";
@@ -57,6 +57,5 @@ export function TimelineView() {
     }
   }
 
-  return <RouteShell title="Timeline" eyebrow="Every quest, one trail"><div className="timeline-heading"><div className="timeline-heading-icon"><CalendarClock size={22} aria-hidden="true" /></div><span className="eyebrow">Stay curious, stay present</span><h1>The trip,<br /><em>in order.</em></h1><p>One lightweight view of what&apos;s happened, what&apos;s live, and what&apos;s next.</p></div><Card className="timeline-summary"><div><span className="eyebrow">Progress so far</span><strong>{completedCount} done</strong></div><div className="timeline-summary-meta"><Check size={15} /> {timelineQuests.length} quests loaded</div></Card><div className="timeline-list" aria-label="Trip quest timeline">{timelineQuests.map((quest) => <TimelineEntry key={quest.id} quest={quest} state={getQuestState(quest, quests, demoCompletions, playerId, now)} onSelect={() => handleSelect(quest)} />)}</div><div className="timeline-key"><span><span className="key-dot key-dot-active" /> Active now</span><span><span className="key-dot key-dot-upcoming" /> Coming up</span><span><span className="key-dot key-dot-done" /> Done</span></div><div className="timeline-footnote"><Clock3 size={15} aria-hidden="true" /> Trigger times sync from the organizer&apos;s clock.</div>{notice && <Toast message={notice} />}</RouteShell>;
+  return <RouteShell title="Timeline" eyebrow="Every quest, one trail"><div className="timeline-heading"><div className="timeline-heading-icon"><CalendarClock size={22} aria-hidden="true" /></div><span className="eyebrow">Stay curious, stay present</span><h1>The trip,<br /><em>in order.</em></h1><p>One lightweight view of what&apos;s happened, what&apos;s live, and what&apos;s next.</p></div><Card className="timeline-summary"><div className="timeline-summary-stat"><span className="eyebrow">Progress so far</span><strong>{completedCount} done</strong></div><span className="timeline-summary-divider" aria-hidden="true" /><div className="timeline-summary-stat timeline-summary-stat-right"><span className="eyebrow">Quest index</span><strong>{timelineQuests.length}<small>quests loaded</small></strong></div></Card><div className="timeline-list" aria-label="Trip quest timeline">{timelineQuests.map((quest, index) => <TimelineEntry key={quest.id} quest={quest} index={index} state={getQuestState(quest, quests, demoCompletions, playerId, now)} onSelect={() => handleSelect(quest)} />)}</div><div className="timeline-key"><span><span className="key-dot key-dot-active" /> Active now</span><span><span className="key-dot key-dot-upcoming" /> Coming up</span><span><span className="key-dot key-dot-done" /> Done</span></div><div className="timeline-footnote"><Clock3 size={15} aria-hidden="true" /> Trigger times sync from the organizer&apos;s clock.</div>{notice && <Toast message={notice} />}</RouteShell>;
 }
-

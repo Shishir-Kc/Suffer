@@ -1,0 +1,11 @@
+{
+  "name": "Suffer — the trip game",
+  "short_name": "Suffer",
+  "description": "A trip game for people who would rather be outside.",
+  "start_url": "/join",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
+  "icons": []
+}
+

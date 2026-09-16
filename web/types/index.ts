@@ -7,6 +7,7 @@ export interface Trip {
   id: string;
   name: string;
   startDate: string;
+  expectedPlayerCount: number;
   status: TripStatus;
   organizerId: string;
   createdAt: string;
@@ -36,6 +37,20 @@ export interface Quest {
   timerDurationSeconds: number | null;
   isFinalQuestCandidate: boolean;
   assignedToPlayerId: string | null;
+  /** The pool this candidate belongs to in the pool-first quest model. */
+  poolId?: string;
+}
+
+export interface QuestPool {
+  id: string;
+  tripId: string;
+  track: Track;
+  order: number;
+  triggerTime: string;
+  candidates: Quest[];
+  assignmentMode: "per-player" | "shared";
+  /** Local sample assignments used by the mock trip. */
+  assignments?: Record<string, string>;
 }
 
 export interface QuestCompletion {
@@ -75,16 +90,6 @@ export interface GPSLog {
   timestamp: string;
 }
 
-export interface SyncPayload {
-  playerId: string;
-  completions: QuestCompletion[];
-  votes: Vote[];
-  reports: Report[];
-  gpsLogs: GPSLog[];
-  lastSyncAt: string;
-}
-
 export interface PlayerPosition extends GPSLog {
   name: string;
 }
-

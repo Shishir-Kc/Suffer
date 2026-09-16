@@ -1,4 +1,4 @@
-import type { Player, Quest, QuestCompletion, Trip } from "@/types";
+import type { Player, Quest, QuestCompletion, QuestPool, Trip } from "@/types";
 
 const today = new Date();
 const at = (hour: number, minute = 0) => {
@@ -11,6 +11,7 @@ export const demoTrip: Trip = {
   id: "BHED26",
   name: "Bhedetar Weekend",
   startDate: "2026-10-17T08:00:00.000Z",
+  expectedPlayerCount: 6,
   status: "active",
   organizerId: "p1",
   createdAt: new Date().toISOString(),
@@ -41,6 +42,15 @@ export const demoQuests: Quest[] = [
   { id: "f8", tripId: "BHED26", track: "final", type: "TBQ", order: 8, title: "The local phrase", description: "Learn a new local phrase and teach it to the organizer at the finish.", triggerTime: at(15, 30), targetCoords: null, timerDurationSeconds: null, isFinalQuestCandidate: true, assignedToPlayerId: null },
   { id: "f9", tripId: "BHED26", track: "final", type: "TBQ", order: 9, title: "Postcard from here", description: "Write a postcard-sized note about this exact view and deliver it to base.", triggerTime: at(15, 30), targetCoords: null, timerDurationSeconds: null, isFinalQuestCandidate: true, assignedToPlayerId: null },
   { id: "f10", tripId: "BHED26", track: "final", type: "TBQ", order: 10, title: "The human compass", description: "Point out east, west, north, and south to the crew with no phone help.", triggerTime: at(15, 30), targetCoords: null, timerDurationSeconds: null, isFinalQuestCandidate: true, assignedToPlayerId: null },
+];
+
+export const demoQuestPools: QuestPool[] = [
+  { id: "ip1", tripId: "BHED26", track: "individual", order: 1, triggerTime: at(8), assignmentMode: "per-player", assignments: { p1: "i1", p2: "i1", p3: "i1", p4: "i1", p5: "i1", p6: "i1" }, candidates: [demoQuests[0]] },
+  { id: "ip2", tripId: "BHED26", track: "individual", order: 2, triggerTime: at(12), assignmentMode: "per-player", assignments: { p1: "i2", p2: "i2", p3: "i2", p4: "i2", p5: "i2", p6: "i2" }, candidates: [demoQuests[1]] },
+  { id: "ip3", tripId: "BHED26", track: "individual", order: 3, triggerTime: at(17), assignmentMode: "per-player", assignments: { p1: "i3", p2: "i3", p3: "i3", p4: "i3", p5: "i3", p6: "i3" }, candidates: [demoQuests[2]] },
+  { id: "gp1", tripId: "BHED26", track: "group", order: 1, triggerTime: at(9), assignmentMode: "shared", assignments: { shared: "g1" }, candidates: [demoQuests[3]] },
+  { id: "gp2", tripId: "BHED26", track: "group", order: 2, triggerTime: at(14), assignmentMode: "shared", assignments: { shared: "g2" }, candidates: [demoQuests[4]] },
+  { id: "fp1", tripId: "BHED26", track: "final", order: 1, triggerTime: at(15, 30), assignmentMode: "per-player", assignments: { p1: "f1" }, candidates: demoQuests.slice(5) },
 ];
 
 export const demoCompletions: QuestCompletion[] = [

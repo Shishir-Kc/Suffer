@@ -1,13 +1,10 @@
 "use client";
 
-import { Download, Wifi } from "lucide-react";
-import { useEffect, useState } from "react";
-import { cacheTripTiles } from "@/lib/tileCache";
+import { Check, Download, Wifi } from "lucide-react";
+import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 
 export function OfflineDownload() {
-  const [progress, setProgress] = useState(0);
-  useEffect(() => { cacheTripTiles(setProgress); }, []);
-  return <Card className="download-card"><div className="download-icon"><Download size={19} /></div><div><strong>{progress >= 1 ? "Map saved for later." : "Save the map before you hike."}</strong><p>{progress >= 1 ? "You can explore the route without signal." : "Downloading the trip area. Do this now while you have WiFi."}</p><div className="progress-track"><span style={{ width: `${progress * 100}%` }} /></div></div><Wifi size={18} className="wifi-icon" aria-hidden="true" /></Card>;
+  const [saved, setSaved] = useState(false);
+  return <Card className="download-card"><div className="download-icon">{saved ? <Check size={19} /> : <Download size={19} />}</div><div><strong>{saved ? "Map marked ready." : "Save the map before you hike."}</strong><p>{saved ? "This demo map is ready to explore without signal." : "Keep the trip area handy for the trail."}</p>{!saved && <button type="button" className="map-save-action" onClick={() => setSaved(true)}>Mark as ready</button>}</div><Wifi size={18} className="wifi-icon" aria-hidden="true" /></Card>;
 }
-

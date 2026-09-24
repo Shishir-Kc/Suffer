@@ -1,5 +1,2 @@
-import { Env } from "../types/env.ts;
-
-export function getDB(env:Env) {
-  return env.DB
-}
+import type { Env } from '../types/env'
+export function getDB(env: Env): D1Database { return env.DB }

@@ -14,5 +14,24 @@ const items = [
 
 export function BottomNav() {
   const pathname = usePathname();
-  return <nav className="bottom-nav" aria-label="Main navigation">{items.map(({ href, label, Icon }) => { const active = pathname === href || (label === "Home" && pathname === "/") || (label === "Quest" && pathname.startsWith("/quest/")); return <Link className={active ? "active" : ""} href={href} key={label}><Icon size={20} strokeWidth={active ? 2.4 : 1.8} aria-hidden="true" /><span>{label}</span></Link>; })}</nav>;
+  return (
+    <nav className="bottom-nav" aria-label="Main navigation">
+      {items.map(({ href, label, Icon }) => {
+        const active =
+          pathname === href ||
+          (label === "Home" && pathname === "/") ||
+          (label === "Quest" && pathname.startsWith("/quest/"));
+        return (
+          <Link className={active ? "active" : ""} href={href} key={label}>
+            <Icon
+              size={20}
+              strokeWidth={active ? 2.4 : 1.8}
+              aria-hidden="true"
+            />
+            <span>{label}</span>
+          </Link>
+        );
+      })}
+    </nav>
+  );
 }

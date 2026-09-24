@@ -1,6 +1,12 @@
 "use client";
 
-import { CalendarClock, Clock3, Flag, UserRound, UsersRound } from "lucide-react";
+import {
+  CalendarClock,
+  Clock3,
+  Flag,
+  UserRound,
+  UsersRound,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Quest } from "@/types";
@@ -35,26 +41,63 @@ export function TimelineScreen() {
     return () => window.clearTimeout(timeout);
   }, [notice]);
 
-  const timelineQuests = useMemo(() => (demoQuestPools.map((pool) => resolveQuestForPlayer(pool, playerId)).filter(Boolean) as Quest[]).sort((a, b) => new Date(a.triggerTime).getTime() - new Date(b.triggerTime).getTime()), [playerId]);
-  const completedCount = timelineQuests.filter((quest) => getQuestState(quest, demoQuestPools, demoCompletions, playerId, now) === "completed").length;
+  const timelineQuests = useMemo(
+    () =>
+      (
+        demoQuestPools
+          .map((pool) => resolveQuestForPlayer(pool, playerId))
+          .filter(Boolean) as Quest[]
+      ).sort(
+        (a, b) =>
+          new Date(a.triggerTime).getTime() - new Date(b.triggerTime).getTime(),
+      ),
+    [playerId],
+  );
+  const completedCount = timelineQuests.filter(
+    (quest) =>
+      getQuestState(quest, demoQuestPools, demoCompletions, playerId, now) ===
+      "completed",
+  ).length;
 
   function handleSelect(quest: Quest) {
-    const state = getQuestState(quest, demoQuestPools, demoCompletions, playerId, now);
+    const state = getQuestState(
+      quest,
+      demoQuestPools,
+      demoCompletions,
+      playerId,
+      now,
+    );
     if (state === "available") {
       router.push(`/quest/${quest.id}`);
       return;
     }
     if (state === "locked") {
-      setNotice(`Unlocks at ${new Date(quest.triggerTime).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`);
+      setNotice(
+        `Unlocks at ${new Date(quest.triggerTime).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`,
+      );
     }
   }
 
   const entries = timelineQuests.map<TimelineEntryProps>((quest) => {
-    const state = getQuestState(quest, demoQuestPools, demoCompletions, playerId, now);
+    const state = getQuestState(
+      quest,
+      demoQuestPools,
+      demoCompletions,
+      playerId,
+      now,
+    );
     const track = trackMeta[quest.track];
-    const status = state === "completed" ? "completed" : state === "available" ? "active" : "upcoming";
+    const status =
+      state === "completed"
+        ? "completed"
+        : state === "available"
+          ? "active"
+          : "upcoming";
     return {
-      time: new Date(quest.triggerTime).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+      time: new Date(quest.triggerTime).toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+      }),
       title: quest.title,
       trackLabel: track.label,
       trackIcon: <track.Icon size={14} aria-hidden="true" />,
@@ -63,5 +106,65 @@ export function TimelineScreen() {
     };
   });
 
-  return <RouteShell title="Timeline" eyebrow="Every quest, one trail"><div className="timeline-heading"><div className="timeline-heading-icon"><CalendarClock size={22} aria-hidden="true" /></div><span className="eyebrow">Stay curious, stay present</span><h1>The trip,<br /><em>in order.</em></h1><p>One calm view of what&apos;s happened, what&apos;s live, and what&apos;s next.</p></div><Card className="timeline-summary"><div className="timeline-summary-stat"><span className="eyebrow">Progress so far</span><strong>{completedCount} <small>of {timelineQuests.length} quests done</small></strong></div><span className="timeline-summary-divider" aria-hidden="true" /><div className="timeline-summary-stat"><span className="eyebrow">Next up</span><strong>{timelineQuests.find((quest) => getQuestState(quest, demoQuestPools, demoCompletions, playerId, now) !== "completed")?.title ?? "Trip complete"}</strong></div></Card><TimelineView entries={entries} /><div className="timeline-key"><span><span className="key-dot key-dot-active" /> Active now</span><span><span className="key-dot key-dot-upcoming" /> Coming up</span><span><span className="key-dot key-dot-done" /> Done</span></div><div className="timeline-footnote"><Clock3 size={15} aria-hidden="true" /> Trigger times are part of this local trip plan.</div>{notice && <Toast message={notice} />}</RouteShell>;
+  return (
+    <RouteShell title="Timeline" eyebrow="Every quest, one trail">
+      <div className="timeline-heading">
+        <div className="timeline-heading-icon">
+          <CalendarClock size={22} aria-hidden="true" />
+        </div>
+        <span className="eyebrow">Stay curious, stay present</span>
+        <h1>
+          The trip,
+          <br />
+          <em>in order.</em>
+        </h1>
+        <p>
+          One calm view of what&apos;s happened, what&apos;s live, and
+          what&apos;s next.
+        </p>
+      </div>
+      <Card className="timeline-summary">
+        <div className="timeline-summary-stat">
+          <span className="eyebrow">Progress so far</span>
+          <strong>
+            {completedCount}{" "}
+            <small>of {timelineQuests.length} quests done</small>
+          </strong>
+        </div>
+        <span className="timeline-summary-divider" aria-hidden="true" />
+        <div className="timeline-summary-stat">
+          <span className="eyebrow">Next up</span>
+          <strong>
+            {timelineQuests.find(
+              (quest) =>
+                getQuestState(
+                  quest,
+                  demoQuestPools,
+                  demoCompletions,
+                  playerId,
+                  now,
+                ) !== "completed",
+            )?.title ?? "Trip complete"}
+          </strong>
+        </div>
+      </Card>
+      <TimelineView entries={entries} />
+      <div className="timeline-key">
+        <span>
+          <span className="key-dot key-dot-active" /> Active now
+        </span>
+        <span>
+          <span className="key-dot key-dot-upcoming" /> Coming up
+        </span>
+        <span>
+          <span className="key-dot key-dot-done" /> Done
+        </span>
+      </div>
+      <div className="timeline-footnote">
+        <Clock3 size={15} aria-hidden="true" /> Trigger times are part of this
+        local trip plan.
+      </div>
+      {notice && <Toast message={notice} />}
+    </RouteShell>
+  );
 }

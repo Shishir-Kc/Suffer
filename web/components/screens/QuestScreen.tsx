@@ -13,5 +13,29 @@ export function QuestScreen({ id }: { id: string }) {
   const [complete, setComplete] = useState(false);
   const [failed, setFailed] = useState(false);
   const quest = demoQuests.find((item) => item.id === id) ?? demoQuests[1];
-  return <RouteShell title={quest.title} eyebrow="Active quest" back={true} nav={false}>{complete ? <QuestComplete /> : quest.type === "LBQ" ? <LBQActive quest={quest} onComplete={() => setComplete(true)} /> : quest.type === "VBQ" ? <VBQActive quest={quest} onComplete={() => setComplete(true)} /> : <TBQActive quest={quest} onComplete={() => setComplete(true)} onFail={() => setFailed(true)} />}{failed && <Toast message="Timer missed. +2 min added to your final quest." />}</RouteShell>;
+  return (
+    <RouteShell
+      title={quest.title}
+      eyebrow="Active quest"
+      back={true}
+      nav={false}
+    >
+      {complete ? (
+        <QuestComplete />
+      ) : quest.type === "LBQ" ? (
+        <LBQActive quest={quest} onComplete={() => setComplete(true)} />
+      ) : quest.type === "VBQ" ? (
+        <VBQActive quest={quest} onComplete={() => setComplete(true)} />
+      ) : (
+        <TBQActive
+          quest={quest}
+          onComplete={() => setComplete(true)}
+          onFail={() => setFailed(true)}
+        />
+      )}
+      {failed && (
+        <Toast message="Timer missed. +2 min added to your final quest." />
+      )}
+    </RouteShell>
+  );
 }

@@ -2,37 +2,22 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "backend",
   "main": "src/index.ts",
-  "compatibility_date": "2026-09-13"
-  // "compatibility_flags": [
-  //   "nodejs_compat"
-  // ],
-  // "vars": {
-  //   "MY_VAR": "my-variable"
-  // },
-  // "kv_namespaces": [
-  //   {
-  //     "binding": "MY_KV_NAMESPACE",
-  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  //   }
-  // ],
-  // "r2_buckets": [
-  //   {
-  //     "binding": "MY_BUCKET",
-  //     "bucket_name": "my-bucket"
-  //   }
-  // ],
-  // "d1_databases": [
-  //   {
-  //     "binding": "MY_DB",
-  //     "database_name": "my-database",
-  //     "database_id": ""
-  //   }
-  // ],
-  // "ai": {
-  //   "binding": "AI"
-  // },
-  // "observability": {
-  //   "enabled": true,
-  //   "head_sampling_rate": 1
-  // }
+  "compatibility_date": "2026-09-24",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "suffer-db",
+      "database_id": "00000000-0000-0000-0000-000000000001"
+    }
+  ],
+  "triggers": { "crons": ["* * * * *"] },
+  "vars": {
+    "COOKIE_NAME": "suffer_session",
+    "COOKIE_SAME_SITE": "Lax",
+    "B2_BUCKET_ID": "replace-with-b2-bucket-id",
+    "B2_BUCKET_NAME": "replace-with-b2-bucket-name",
+    "FACE_SERVICE_URL": "https://replace-with-vps-host",
+    "FACE_CALLBACK_URL": "http://localhost:8787/api/photos/callback",
+    "FRONTEND_ORIGIN": "http://localhost:3000"
+  }
 }

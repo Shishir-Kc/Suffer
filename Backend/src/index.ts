@@ -1,9 +1,10 @@
-import { Hono } from 'hono'
+import app from './app'
+import { retryTimedOutJobs } from './modules/photos/routes'
+import type { Env } from './types/env'
 
-const app = new Hono()
-
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
-
-export default app
+export default {
+  fetch: app.fetch,
+  scheduled(_controller: { cron: string; scheduledTime: number }, env: Env, ctx: { waitUntil(promise: Promise<unknown>): void }) {
+    ctx.waitUntil(retryTimedOutJobs(env))
+  },
+}

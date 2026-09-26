@@ -66,4 +66,4 @@ export function JoinScreen() {
     </main>
   );
 }
-2
+2;

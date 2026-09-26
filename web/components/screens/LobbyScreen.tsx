@@ -7,10 +7,23 @@ import { useRouter } from "next/navigation";
 import { demoPlayers, demoTrip } from "@/lib/mockData";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { SelfieCapture } from "@/components/lobby/SelfieCapture";
 
 export function LobbyScreen() {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
+  const [players, setPlayers] = useState(demoPlayers);
+  const currentPlayerId = demoPlayers[0]?.id;
+  const currentPlayer = players.find((player) => player.id === currentPlayerId);
+
+  function saveCurrentPlayerSelfie(selfieDataUrl: string) {
+    setPlayers((currentPlayers) =>
+      currentPlayers.map((player) =>
+        player.id === currentPlayerId ? { ...player, selfieDataUrl } : player,
+      ),
+    );
+  }
+
   return (
     <main className="lobby-screen">
       <div className="lobby-top">
@@ -31,6 +44,10 @@ export function LobbyScreen() {
           {copied ? "Copied" : "Copy code"}
         </button>
       </Card>
+      <SelfieCapture
+        selfieDataUrl={currentPlayer?.selfieDataUrl}
+        onSave={saveCurrentPlayerSelfie}
+      />
       <section className="crew-section">
         <div className="section-heading">
           <h2>
@@ -39,9 +56,17 @@ export function LobbyScreen() {
           <Users size={19} aria-hidden="true" />
         </div>
         <div className="crew-list">
-          {demoPlayers.map((player) => (
+          {players.map((player) => (
             <div className="crew-person" key={player.id}>
-              <span className="avatar">{player.name[0]}</span>
+              {player.selfieDataUrl ? (
+                <img
+                  className="avatar avatar-photo"
+                  src={player.selfieDataUrl}
+                  alt={`${player.name}'s trip avatar`}
+                />
+              ) : (
+                <span className="avatar">{player.name[0]}</span>
+              )}
               <span>{player.name}</span>
               {player.isOrganizer && <Crown size={15} aria-label="Organizer" />}
             </div>

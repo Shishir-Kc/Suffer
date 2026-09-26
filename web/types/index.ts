@@ -22,6 +22,7 @@ export interface Player {
   finalQuestStartTime: string | null;
   finalQuestCompleteTime: string | null;
   joinedAt: string;
+  selfieDataUrl?: string;
 }
 
 export interface Quest {

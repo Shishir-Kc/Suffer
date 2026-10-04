@@ -8,8 +8,8 @@ import { demoCompletions, demoPlayers, demoQuestPools } from "@/lib/mockData";
 import { getCurrentQuest, getQuestState } from "@/lib/questEngine";
 import { RouteShell } from "@/components/RouteShell";
 import { Card } from "@/components/ui/Card";
-import { QuestCard } from "@/components/quest/QuestCard";
-import { ChillZone } from "@/components/quest/ChillZone";
+import { QuestCard } from "@/components/features/quest/components/QuestCard";
+import { ChillZone } from "@/components/features/quest/components/ChillZone";
 
 export function HomeScreen() {
   const router = useRouter();

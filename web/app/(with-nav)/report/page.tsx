@@ -1,4 +1,4 @@
-import { ReportScreen } from "@/components/screens/ReportScreen";
+import { ReportScreen } from "@/components/features/report/ReportScreen";
 
 export default function Page() {
   return <ReportScreen />;

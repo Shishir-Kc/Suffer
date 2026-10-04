@@ -1,4 +1,4 @@
-import { MapScreen } from "@/components/screens/MapScreen";
+import { MapScreen } from "@/components/features/map/MapScreen";
 
 export default function Page() {
   return <MapScreen />;

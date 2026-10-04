@@ -6,7 +6,7 @@ import type { Quest } from "@/types";
 import { haversineDistanceMeters, watchGps } from "@/lib/gps";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { MapView } from "@/components/map/MapView";
+import { MapView } from "@/components/shared/MapView";
 
 export function LBQActive({
   quest,

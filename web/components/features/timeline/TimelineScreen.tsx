@@ -15,8 +15,8 @@ import { getQuestState, resolveQuestForPlayer } from "@/lib/questEngine";
 import { RouteShell } from "@/components/RouteShell";
 import { Card } from "@/components/ui/Card";
 import { Toast } from "@/components/ui/Toast";
-import { TimelineView } from "@/components/timeline/TimelineView";
-import type { TimelineEntryProps } from "@/components/timeline/TimelineEntry";
+import { TimelineView } from "@/components/features/timeline/components/TimelineView";
+import type { TimelineEntryProps } from "@/components/features/timeline/components/TimelineEntry";
 
 const trackMeta = {
   individual: { label: "Your quest", Icon: UserRound },

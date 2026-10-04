@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { demoQuests } from "@/lib/mockData";
-import { QuestComplete } from "@/components/quest/QuestComplete";
-import { LBQActive } from "@/components/quest/LBQActive";
-import { VBQActive } from "@/components/quest/VBQActive";
-import { TBQActive } from "@/components/quest/TBQActive";
+import { QuestComplete } from "@/components/features/quest/components/QuestComplete";
+import { LBQActive } from "@/components/features/quest/components/LBQActive";
+import { VBQActive } from "@/components/features/quest/components/VBQActive";
+import { TBQActive } from "@/components/features/quest/components/TBQActive";
 import { RouteShell } from "@/components/RouteShell";
 import { Toast } from "@/components/ui/Toast";
 

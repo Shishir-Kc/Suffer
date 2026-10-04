@@ -1,8 +1,8 @@
 "use client";
 
 import { RouteShell } from "@/components/RouteShell";
-import { FinalReveal } from "@/components/leaderboard/FinalReveal";
-import { PlayerRow } from "@/components/leaderboard/PlayerRow";
+import { FinalReveal } from "@/components/shared/FinalReveal";
+import { PlayerRow } from "@/components/features/leaderboard/components/PlayerRow";
 import { demoCompletions, demoPlayers } from "@/lib/mockData";
 
 export function LeaderboardScreen() {

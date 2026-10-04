@@ -1,4 +1,4 @@
-import { QuestScreen } from "@/components/screens/QuestScreen";
+import { QuestScreen } from "@/components/features/quest/QuestScreen";
 
 export default async function Page({
   params,

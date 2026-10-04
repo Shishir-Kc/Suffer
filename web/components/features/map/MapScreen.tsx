@@ -2,10 +2,10 @@
 
 import { Compass, MapPinned } from "lucide-react";
 import { RouteShell } from "@/components/RouteShell";
-import { MapView } from "@/components/map/MapView";
-import { OfflineDownload } from "@/components/map/OfflineDownload";
-import { PlayerMarker } from "@/components/map/PlayerMarker";
-import { QuestMarker } from "@/components/map/QuestMarker";
+import { MapView } from "@/components/shared/MapView";
+import { OfflineDownload } from "@/components/features/map/components/OfflineDownload";
+import { PlayerMarker } from "@/components/features/map/components/PlayerMarker";
+import { QuestMarker } from "@/components/features/map/components/QuestMarker";
 
 export function MapScreen() {
   return (

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { demoPlayers, demoTrip } from "@/lib/mockData";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { SelfieCapture } from "@/components/lobby/SelfieCapture";
+import { SelfieCapture } from "@/components/features/lobby/components/SelfieCapture";
 
 export function LobbyScreen() {
   const router = useRouter();

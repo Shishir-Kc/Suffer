@@ -1,7 +1,7 @@
 import {
   TimelineEntry,
   type TimelineEntryProps,
-} from "@/components/timeline/TimelineEntry";
+} from "@/components/features/timeline/components/TimelineEntry";
 
 export function TimelineView({ entries }: { entries: TimelineEntryProps[] }) {
   return (

@@ -6,7 +6,7 @@ import { RouteShell } from "@/components/RouteShell";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Stopwatch } from "@/components/ui/Timer";
-import { FinalReveal } from "@/components/leaderboard/FinalReveal";
+import { FinalReveal } from "@/components/shared/FinalReveal";
 
 export function FinalQuestScreen() {
   const [done, setDone] = useState(false);

@@ -1,0 +1,14 @@
+ALTER TABLE trips ADD COLUMN start_date TEXT;
+ALTER TABLE trips ADD COLUMN expected_player_count INTEGER NOT NULL DEFAULT 4;
+ALTER TABLE trips ADD COLUMN status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('waiting','active','finished'));
+ALTER TABLE quest_variants ADD COLUMN title TEXT;
+ALTER TABLE quest_variants ADD COLUMN type TEXT CHECK(type IN ('LBQ','VBQ','TBQ'));
+ALTER TABLE quest_variants ADD COLUMN pool_id TEXT;
+ALTER TABLE final_quest_candidates ADD COLUMN title TEXT;
+ALTER TABLE final_quest_candidates ADD COLUMN type TEXT NOT NULL DEFAULT 'LBQ' CHECK(type IN ('LBQ','VBQ','TBQ'));
+ALTER TABLE final_quest_candidates ADD COLUMN target_lat REAL;
+ALTER TABLE final_quest_candidates ADD COLUMN target_lng REAL;
+ALTER TABLE final_quest_candidates ADD COLUMN radius_meters REAL NOT NULL DEFAULT 50;
+ALTER TABLE final_quest_candidates ADD COLUMN timer_seconds INTEGER;
+UPDATE quest_variants SET title=description, type=(SELECT type FROM quest_themes WHERE id=theme_id);
+UPDATE final_quest_candidates SET title=description;
